@@ -66,6 +66,10 @@
             <version>1.4.200</version>
         </dependency>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
@@ -129,15 +133,19 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>7.5.2</version>
                 <configuration>
-                    <url>jdbc:h2:~/memorygarden</url>
-                    <user>sa</user>
-                    <password>123</password>
+                    <url>jdbc:mysql://8.130.167.30:3306/memorygarden</url>
+                    <user>root</user>
+                    <password>123456</password>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
                         <version>1.4.200</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -150,6 +158,10 @@
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
                         <version>1.4.200</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
                     </dependency>
                 </dependencies>
             </plugin>
