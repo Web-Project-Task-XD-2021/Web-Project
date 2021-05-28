@@ -35,7 +35,7 @@ public class QuestionService {
 
     public PaginationDTO list(String search, Integer page, Integer size) {
 
-        if (StringUtils.isNotBlank(search)){
+        if (StringUtils.isNotBlank(search)) {
             String[] words = StringUtils.split(search, " ");
             search = Arrays.stream(words).collect(Collectors.joining("|"));
         }
@@ -60,7 +60,7 @@ public class QuestionService {
         }
         paginationDTO.setPagination(totalCount, page, size);
         //size*(page-1)
-        Integer offset = size * (page - 1);
+        Integer offset = page < 1 ? 0 : size * (page - 1);
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
         questionQueryDTO.setPage(offset);
@@ -167,7 +167,7 @@ public class QuestionService {
     }
 
     public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
-        if (StringUtils.isBlank(queryDTO.getTag())){
+        if (StringUtils.isBlank(queryDTO.getTag())) {
             return new ArrayList<>();
         }
         String[] tags = StringUtils.split(queryDTO.getTag(), ",");
@@ -179,7 +179,7 @@ public class QuestionService {
         List<Question> questions = questionExtMapper.selectRelated(question);
         List<QuestionDTO> questionDTOS = questions.stream().map(q -> {
             QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(q,questionDTO);
+            BeanUtils.copyProperties(q, questionDTO);
             return questionDTO;
         }).collect(Collectors.toList());
         return questionDTOS;
