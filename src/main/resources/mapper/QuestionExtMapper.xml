@@ -19,14 +19,14 @@
     </resultMap>
 
     <update id="incView" parameterType="life.lieren.memorygarden.model.Question">
-    update QUESTION
+    update question
     set
     VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER}
     where id = #{id}
   </update>
 
     <update id="incCommentCount" parameterType="life.lieren.memorygarden.model.Question">
-    update QUESTION
+    update question
     set
     COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER}
     where id = #{id}
@@ -34,13 +34,13 @@
 
     <select id="selectRelated" parameterType="life.lieren.memorygarden.model.Question" resultMap="BaseResultMap">
     select *
-    from QUESTION
+    from question
     where id != #{id} and tag regexp #{tag}
   </select>
 
     <select id="countBySearch" parameterType="life.lieren.memorygarden.dto.QuestionQueryDTO"
             resultType="java.lang.Integer">
-        select count (*) from QUESTION
+        select count (*) from question
         <where>
             <if test="search != null">
                 and title regexp #{search}
@@ -50,7 +50,7 @@
 
     <select id="selectBySearch" parameterType="life.lieren.memorygarden.dto.QuestionQueryDTO"
             resultMap="BaseResultMap">
-        select * from QUESTION
+        select * from question
         <where>
             <if test="search != null">
                 and title regexp #{search}
